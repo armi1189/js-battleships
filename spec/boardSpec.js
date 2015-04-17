@@ -11,6 +11,10 @@ describe('Board when is created', function(){
     expect(Object.keys(board.grid).length).toEqual(100);
   });
 
+  it('knows the board is not ready when 0 ships are on it', function(){
+    expect(board.ready()).toBe(false)
+  });
+
 })
  
 describe('Board after been created', function(){
@@ -100,8 +104,19 @@ describe('Board after been created', function(){
     expect(board.checkSunk()).toBe(false);
   });
 
-  // it('can fill all the content with water', function(){
+  it('knows the number of pieces required', function(){
+    expect(board.numberOfPieces).toEqual(1);
+  });
 
-  // });
+  it('can count the ships that are placed', function(){
+    board.place(ship, "A1", "horizontal");
+    expect(board.shipsPlaced).toEqual(1);
+  });
+
+  it('knows the board is ready when required ship count ships are on it', function(){
+    board.place(ship, "A1", "horizontal");
+    expect(board.ready()).toBe(true);
+  });
+
 });  
 

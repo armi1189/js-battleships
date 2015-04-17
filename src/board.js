@@ -1,6 +1,8 @@
-function Board(size){
+function Board(size, pieces){
   this.grid = {};
   this.generateGrid(size || 2);
+  this.numberOfPieces = (pieces || 1);
+  this.shipsPlaced = 0;
 }
 
 Board.prototype.generateGrid = function(size) {
@@ -18,6 +20,7 @@ Board.prototype.place = function(ship, coord, orient) {
   for(i=0; i < coord.length; i++) {
     this.grid[coord[i]].content = ship;
   };
+  this.shipsPlaced ++;
 };
 
 
@@ -44,6 +47,10 @@ Board.prototype.checkSunk = function() {
     }
   }
   return true
+};
+
+Board.prototype.ready = function() {
+  return (this.numberOfPieces === this.shipsPlaced);
 };
 
 function horizontal(orient){
