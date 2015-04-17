@@ -20,6 +20,32 @@ Board.prototype.place = function(ship, coord, orient) {
   };
 };
 
+
+Board.prototype.checkCoord = function(coords){
+  for (i=0; i < coords.length; i++){
+    var gridKeys = Object.keys(this.grid)
+    if (gridKeys.indexOf(coords[i]) < 0) return false;
+    if (this.grid[coords[i]].content !== "") return false;
+  }
+  return true
+};
+
+Board.prototype.bomb = function(coord){
+  var gridKeys = Object.keys(this.grid)
+  if (gridKeys.indexOf(coord) < 0) throw new Error('Can\'t bomb outside boundries');
+  this.grid[coord].hit(); 
+}
+
+Board.prototype.checkSunk = function() {
+  var gridKeys = Object.keys(this.grid);
+  for (i=0; i < gridKeys.length; i++) {
+    if (this.grid[gridKeys[i]].content !== "") {
+      if (!(this.grid[gridKeys[i]].content.sunk)) return false;
+    }
+  }
+  return true
+};
+
 function horizontal(orient){
   return orient === "horizontal";
 };
@@ -48,17 +74,4 @@ function getVerticalCoords(shipSize,coord) {
     coords.push(letter.concat(coord[1]));
   }
   return coords;
-}
-
-Board.prototype.checkCoord = function(coords){
-  for (i=0; i < coords.length; i++){
-    var gridKeys = Object.keys(this.grid)
-    if (gridKeys.indexOf(coords[i]) < 0) return false;
-    if (this.grid[coords[i]].content !== "") return false;
-  }
-  return true
-};
-
-Board.prototype.bomb = function(first_cell, second_cell){
-  this.grid[coord[i]].content = ship;
 }
