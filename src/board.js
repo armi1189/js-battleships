@@ -16,7 +16,7 @@ Board.prototype.place = function(ship, coord, orient) {
   var coord = getCoords(ship.size, coord, orient);
   if (!(this.checkCoord(coord))) throw new Error('Can\'t place a ship there');
   for(i=0; i < coord.length; i++) {
-    this.grid[coord[i]].content = ship; 
+    this.grid[coord[i]].content = ship;
   };
 };
 
@@ -58,3 +58,7 @@ Board.prototype.checkCoord = function(coords){
   }
   return true
 };
+
+Board.prototype.bomb = function(first_cell, second_cell){
+  this.grid[coord[i]].content = ship;
+}
