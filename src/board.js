@@ -22,7 +22,7 @@ Board.prototype.place = function(ship, coordX, coordY, orient) {
 };
 
 function horizontal(orient){
-  orient === "horizontal";
+  return orient === "horizontal";
 };
 
 function getCoords(shipSize, coordX, coordY, orient) {
