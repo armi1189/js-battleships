@@ -28,7 +28,7 @@ Board.prototype.checkCoord = function(coords){
   for (i=0; i < coords.length; i++){
     var gridKeys = Object.keys(this.grid)
     if (gridKeys.indexOf(coords[i]) < 0) return false;
-    if (this.grid[coords[i]].content !== "") return false;
+    if (this.grid[coords[i]].content.size) return false;
   }
   return true
 };
@@ -42,7 +42,7 @@ Board.prototype.bomb = function(coord){
 Board.prototype.checkSunk = function() {
   var gridKeys = Object.keys(this.grid);
   for (i=0; i < gridKeys.length; i++) {
-    if (this.grid[gridKeys[i]].content !== "") {
+    if (this.grid[gridKeys[i]].content.size) {
       if (!(this.grid[gridKeys[i]].content.sunk)) return false;
     }
   }

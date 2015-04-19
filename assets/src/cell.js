@@ -1,5 +1,5 @@
 function Cell(){
-  this.content = "";
+  this.content = new Water();
   this.isHit = false;
 };
 

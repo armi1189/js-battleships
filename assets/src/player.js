@@ -8,7 +8,11 @@ Player.prototype.hasBoard = function() {
 };
 
 Player.prototype.ready = function() {
-  return (this.board && this.board.ready())
+  return (this.hasBoard() && this.board.ready())
+};
+
+Player.prototype.registerShot = function(cell) {
+  return this.board.bomb(cell);
 };
 
 Player.prototype.lost = function() {
