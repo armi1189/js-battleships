@@ -1,0 +1,18 @@
+<% if current_user %>
+  <script type="text/javascript" src="src/gamesView.js"></script>
+  
+  <% P1games = Game.first(player1_id: session[:user_id]) %>
+  <% P2games = Game.first(player2_id: session[:user_id]) %>
+  <% redirect to '/game' if P1games || P2games %>
+  
+  <a href="/log_out">Log out</a>
+  <input type="hidden" id="id" value="<%= session[:user_id] %>">  
+  <form action="/create_game" method="post"> 
+    <button type="submit" id="createGame">CREATE GAME</button>
+  </form>
+  <div id="games"></div>
+  <section class="player_one_grid"></section>
+<% else %>
+  <a href="/log_in">Log In</a>
+  <a href="/sign_up">Sign Up</a>
+<% end %>

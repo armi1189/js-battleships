@@ -1,0 +1,45 @@
+<h1> Game Page </h1>
+
+<% if @game.player1.id != @game.player2.id %>
+<script type="text/javascript" src="src/game.js"></script>
+<script type="text/javascript" src="src/player.js"></script>
+<script type="text/javascript" src="src/board.js"></script>
+<script type="text/javascript" src="src/water.js"></script>
+<script type="text/javascript" src="src/ship.js"></script>
+<script type="text/javascript" src="src/cell.js"></script>
+<script type="text/javascript" src="src/gameSetup.js"></script>
+<script type="text/javascript" src="src/gameInterface.js"></script>
+<script> 
+  gameSetup('<%= @game.player1.username %>','<%= @game.player2.username %>');
+</script>
+<div id="test"><%= @game.player1.username %> vs <%= @game.player2.username %></div>
+
+<button id="vert_hor_switch" data-position="horizontal">Switch</button>
+<div>place:<span id="vert_hor"></span></div>
+
+  <% if @game.player1.id == session[:user_id] %>
+    <style>
+      .player_two_grid .P2 {
+        background-color: orange;
+      }
+    </style>
+    <div class="player_one_grid"></div>
+    <div class="player_two_grid" style="pointer-events: none"></div>
+
+  <% else %>
+    <style>
+      .player_one_grid .P1 {
+        background-color: #1e1e1e;
+      }
+    </style>
+    <div class="player_two_grid"></div>
+    <div class="player_one_grid" style="pointer-events: none"></div>
+
+  <% end %>
+
+
+<% else %>
+
+<meta http-equiv="refresh" content="5"/>
+<h1> waiting </h1>
+<% end %>
